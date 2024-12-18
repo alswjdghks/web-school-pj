@@ -3,10 +3,12 @@ const morgan = require('morgan'); // 서버로 들어온 요청과 응답을 기
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const dotenv = require('dotenv'); // .env 파일을 읽어서 process.env로 만듦
+const passport = require('passport');
 const path = require('path');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 dotenv.config();
 const app = express();
