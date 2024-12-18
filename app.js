@@ -12,6 +12,7 @@ const passportConfig = require('./passport');
 
 dotenv.config();
 const app = express();
+passportConfig(); // passport 설정
 app.set('port',process.env.PORT || 3001);
 app.set('view engine','html');
 nunjucks.configure('views',{
@@ -41,6 +42,9 @@ app.use(session({
     },
     name:'session-cookie',
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.raw());
 app.use(bodyParser.text());
 
