@@ -1,17 +1,20 @@
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 const { where } = require('sequelize');
 
 module.exports = () => {
-    passport.use(new localStrategy({
+    passport.use(new LocalStrategy({
         usernameField: 'id',
         passwordField: 'password',
     }, async(id,password,done) => {
         try{
-            const exUser = User.findOne( {where : { id } } );
+            const exUser = await User.findOne({ where : { id } });
+            console.log('User:', exUser);
+            console.log('Plain password:', password);
+            console.log('Hashed password:', exUser.password);
             if(exUser){
                 const result = await bcrypt.compare(password, exUser.password);
                 if(result){
