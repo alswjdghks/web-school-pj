@@ -11,15 +11,12 @@
     <div class="container">
       <div class="profile-wrap">
         <div class="profile">
+          <div><h1>Here is jerry`s Webpage</h1></div>
           {% if user and user.id %}
             <div class="user-name">{{'안녕하세요! ' + user.name + '님'}}</div>
             <div class="half">
               <div>작성한 게시글 개수</div>
-              <div class="count following-count">{{followingCount}}</div>
-            </div>
-            <div class="half">
-              <div>팔로워</div>
-              <div class="count follower-count">{{followerCount}}</div>
+              <div class="count post-count">{{postCount}}</div>
             </div>
           <input id="my-id" type="hidden" value="{{user.id}}">
           <a id="my-profile" href="/profile" class="btn">내 프로필</a>
@@ -37,12 +34,20 @@
             <a id="join" href="/account" class="btn">회원가입</a>
             <button id="login" type="submit" class="btn">로그인</button>
           </form>
+          <!-- 설명 텍스트와 이미지 추가 -->
+          <div class="description">
+            <p>로그인 후 다양한 서비스를 이용할 수 있습니다.</p>
+            <p>처음 방문하셨다면 회원가입을 진행해주세요.</p>
+          </div>
         {% endif %}
         </div>
         <footer>
           Made by&nbsp;
-          <a href="https://www.zerocho.com" target="_blank">ZeroCho</a>
+          <a href="https://github.com/alswjdghks" target="_blank">Jerry</a>
         </footer>
+        <div>
+          <img src="IMG_0126.jpeg" alt="jerry`s pet dog">
+        </div>
       </div>
       {% block content %}
       {% endblock %}

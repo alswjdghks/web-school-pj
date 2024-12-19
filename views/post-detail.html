@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="post-detail">
+  <h1>게시글 상세</h1>
+  <p><strong>작성자:</strong> {{ post.User.username }}</p>
+  <p><strong>내용:</strong> {{ post.content }}</p>
+  <a href="/profile">프로필로 돌아가기</a>
+</div>
+{% endblock %}

@@ -1,21 +1,29 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-  <div class="timeline">
-    <div class="followings half">
-      <h2>작성한 게시글 목록</h2>
-      {% if user.Followings %}
-        {% for following in user.Followings %}
-          <div>{{following.nick}}</div>
-        {% endfor %}
-      {% endif %}
+  <div class="profile">
+    <!-- 작성한 게시글 개수 -->
+    <div class="post-count">
+      <h2>총 작성한 게시글: {{ postCount }}개</h2>
     </div>
-    <div class="followers half">
-      <h2>팔로워 목록</h2>
-      {% if user.Followers %}
-        {% for follower in user.Followers %}
-          <div>{{follower.nick}}</div>
-        {% endfor %}
+
+    <!-- 작성한 게시글 목록 -->
+    <div class="posts">
+      <h2>작성한 게시글 목록</h2>
+      {% if postIdList and postIdList|length > 0 %}
+        <ul>
+          {% for post in user.Post %}
+            <li>
+              <div class="post">
+                <p>게시글 ID: {{ post.id }}</p>
+                <p>작성자: {{ post.user.id }}</p>
+                <p>내용: {{ post.content }}</p>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>작성한 게시글이 없습니다.</p>
       {% endif %}
     </div>
   </div>

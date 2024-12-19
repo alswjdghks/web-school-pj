@@ -13,6 +13,7 @@ const passportConfig = require('./passport');
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
 
 const app = express();
 passportConfig(); // passport 설정
@@ -32,6 +33,7 @@ sequelize.sync({ force:false })
 
 app.use(morgan('dev'));
 app.use('/',express.static(path.join(__dirname,'public'))); // 정적인 파일들 제공, 요청경로 와 실제경로 설정
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json()); // 요청의 본문을 해석
 app.use(express.urlencoded({ extends: false })); // 폼 요청 해석
 app.use(cookieParser(process.env.COOKIE_SECRET)); // 요청 헤더의 쿠키를 해석
@@ -51,6 +53,7 @@ app.use(passport.session());
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/post',postRouter);
 
 app.use(bodyParser.raw());
 app.use(bodyParser.text());

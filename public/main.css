@@ -1,108 +1,206 @@
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; height: 100%; }
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Buttons */
 .btn {
   display: inline-block;
-  padding: 0 5px;
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
   text-decoration: none;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
-  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+/* Forms */
+form {
+  margin-bottom: 20px;
+  padding: 15px;
   background: white;
-  border: 1px solid silver;
-  color: crimson;
-  height: 37px;
-  line-height: 37px;
-  vertical-align: top;
-  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-input[type='text'], input[type='email'], input[type='password'], textarea {
-  border-radius: 4px;
-  height: 37px;
-  padding: 10px;
-  border: 1px solid silver;
+
+.input-group {
+  margin-bottom: 15px;
 }
-.container { width: 100%; height: 100%; }
-@media screen and (min-width: 800px) {
-  .container { width: 800px; margin: 0 auto; }
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
-.input-group { margin-bottom: 15px; }
-.input-group label { width: 25%; display: inline-block; }
-.input-group input { width: 70%; }
-.half { float: left; width: 50%; margin: 10px 0; }
-#join { float: right; }
-.profile-wrap {
+
+.input-group input,
+.input-group textarea,
+.input-group button {
   width: 100%;
-  display: inline-block;
-  vertical-align: top;
-  margin: 10px 0;
-}
-@media screen and (min-width: 800px) {
-  .profile-wrap { width: 290px; margin-bottom: 0; }
-}
-.profile {
-  text-align: left;
   padding: 10px;
-  margin-right: 10px;
-  border-radius: 4px;
-  border: 1px solid silver;
-  background: lightcoral;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
-.user-name { font-weight: bold; font-size: 18px; }
-.count { font-weight: bold; color: crimson; font-size: 18px; }
-.timeline {
-  margin-top: 10px;
-  width: 100%;
-  display: inline-block;
-  border-radius: 4px;
-  vertical-align: top;
+
+.input-group textarea {
+  resize: none;
+  min-height: 100px;
 }
-@media screen and (min-width: 800px) { .timeline { width: 500px; } }
-#twit-form {
-  border-bottom: 1px solid silver;
-  padding: 10px;
-  background: lightcoral;
-  overflow: hidden;
-}
-#img-preview { max-width: 100%; }
-#img-label {
-  float: left;
-  cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid crimson;
-  padding: 0 10px;
-  color: white;
-  font-size: 12px;
-  height: 37px;
-  line-height: 37px;
-}
-#img { display: none; }
-#twit { width: 100%; min-height: 72px; }
-#twit-btn {
-  float: right;
-  color: white;
-  background: crimson;
+
+.input-group input[type="file"] {
   border: none;
 }
-.twit {
-  border: 1px solid silver;
-  border-radius: 4px;
-  padding: 10px;
-  position: relative;
+
+/* Profile Page */
+.profile {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-count h2 {
+  margin-bottom: 20px;
+}
+
+.posts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.posts li {
   margin-bottom: 10px;
 }
-.twit-author { display: inline-block; font-weight: bold; margin-right: 10px; }
-.twit-follow {
-  padding: 1px 5px;
-  background: #fff;
-  border: 1px solid silver;
+
+.posts .post {
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  color: crimson;
-  font-size: 12px;
-  cursor: pointer;
 }
-.twit-img { text-align: center; }
-.twit-img img { max-width: 75%; }
-.error-message { color: red; font-weight: bold; }
-#search-form { text-align: right; }
-#join-form { padding: 10px; text-align: center; }
-#hashtag-form { text-align: right; }
-footer { text-align: center; }
+
+/* Timeline */
+.timeline {
+  margin-top: 20px;
+}
+
+.twits {
+  margin-top: 20px;
+}
+
+.twit {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.twit-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.twit-content {
+  margin-bottom: 10px;
+}
+
+.twit-img img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* Post Detail */
+.post-detail {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-detail h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.post-detail p {
+  margin: 10px 0;
+}
+
+.post-detail a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.post-detail a:hover {
+  text-decoration: underline;
+}
+
+/* Error Messages */
+#error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .profile, .post-detail {
+    padding: 15px;
+  }
+
+  .btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    padding: 8px;
+  }
+}
