@@ -6,13 +6,14 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-router.post('./account', isNotLoggedIn, async(res,req,next) => {
+router.post('/account', isNotLoggedIn, async(req,res,next) => {
+    console.log(req.body)
     const { email, name, id ,password } = req.body;
     try {
         const exUserByEmail = await User.findOne({ where: { email } });
         const exUserById = await User.findOne({ where: { id } });
         if( exUserByEmail || exUserById ){
-            return res.redirect('./account?error=exist');
+            return res.redirect('/account?error=exist');
         }
         const hash = await bcrypt.hash(password,12);
         await User.create({
@@ -28,7 +29,7 @@ router.post('./account', isNotLoggedIn, async(res,req,next) => {
     }
 });
 
-router.post('./login', isNotLoggedIn, async(req,res,next) => {
+router.post('/login', isNotLoggedIn, async(req,res,next) => {
     passport.authenticate('local', (authError,user,info) => {
         if(authError){
             console.error(authError);
@@ -42,7 +43,7 @@ router.post('./login', isNotLoggedIn, async(req,res,next) => {
                 console.error(loginError);
                 return next(loginError);
             }
-            return res.redirect('./');
+            return res.redirect('/');
         });
     })(req,res,next);
 });

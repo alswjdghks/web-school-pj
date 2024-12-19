@@ -11,6 +11,9 @@ const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 dotenv.config();
+const pageRouter = require('./routes/page');
+const authRouter = require('./routes/auth');
+
 const app = express();
 passportConfig(); // passport 설정
 app.set('port',process.env.PORT || 3001);
@@ -45,6 +48,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', pageRouter);
+app.use('/auth', authRouter);
+
 app.use(bodyParser.raw());
 app.use(bodyParser.text());
 
