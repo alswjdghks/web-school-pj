@@ -14,9 +14,8 @@
           <div><h1>Here is jerry`s Webpage</h1></div>
           {% if user and user.id %}
             <div class="user-name">{{'안녕하세요! ' + user.name + '님'}}</div>
-            <div class="half">
-              <div>작성한 게시글 개수</div>
-              <div class="count post-count">{{postCount}}</div>
+            <div>
+              <br>
             </div>
           <input id="my-id" type="hidden" value="{{user.id}}">
           <a id="my-profile" href="/profile" class="btn">내 프로필</a>

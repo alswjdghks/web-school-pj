@@ -1,30 +1,34 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-  <div class="profile">
-    <!-- 작성한 게시글 개수 -->
-    <div class="post-count">
-      <h2>총 작성한 게시글: {{ postCount }}개</h2>
-    </div>
-
-    <!-- 작성한 게시글 목록 -->
-    <div class="posts">
-      <h2>작성한 게시글 목록</h2>
-      {% if postIdList and postIdList|length > 0 %}
-        <ul>
-          {% for post in user.Post %}
-            <li>
-              <div class="post">
-                <p>게시글 ID: {{ post.id }}</p>
-                <p>작성자: {{ post.user.id }}</p>
-                <p>내용: {{ post.content }}</p>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>작성한 게시글이 없습니다.</p>
-      {% endif %}
-    </div>
+<div class="profile">
+  <!-- 작성한 게시글 개수 -->
+  <div class="post-count">
+    <h2>총 작성한 게시글: {{ postCount }}개</h2>
   </div>
+
+  <!-- 작성한 게시글 목록 -->
+  <div class="posts">
+    <h2>작성한 게시글 목록</h2>
+    {% if posts and posts|length > 0 %}
+      <ul>
+        {% for post in posts %}
+        <li>
+          <div class="post">
+            <p><strong>게시글 ID:</strong> {{ post.postId }}</p>
+            <p><strong>작성자:</strong> {{ post.User.name }}</p>
+            <p>{{ post.content }}</p>
+            {% if post.img %}
+            <img src="/{{ post.img }}" alt="게시글 이미지">
+            {% endif %}
+            <a href="/posts/{{ post.id }}">게시글 보기</a>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>작성한 게시글이 없습니다.</p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

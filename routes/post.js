@@ -59,7 +59,7 @@ router.get('/search', async (req, res, next) => {
                     where: {
                         username: { [Op.substring]: keyword }, // 작성자 이름 검색
                     },
-                    attributes: ['username'], // 필요한 작성자 정보만 가져옴
+                    attributes: ['name'], // 필요한 작성자 정보만 가져옴
                 },
             ],
         });
@@ -75,7 +75,7 @@ router.get('/posts/:id', isLoggedIn, async (req, res, next) => {
     try {
         const post = await Post.findOne({
             where: { id: req.params.id },
-            include: [{ model: User, attributes: ['username'] }],
+            include: [{ model: User, attributes: ['name'] }],
         });
 
         if (!post) {

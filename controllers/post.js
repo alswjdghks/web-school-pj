@@ -10,7 +10,7 @@ exports.uploadPost = async (req, res, next) => {
     const post = await Post.create({
       content: req.body.content,
       img: req.body.url,
-      UserId: req.user.id,
+      userId: req.user.userId,
     });
     res.redirect('/');
   } catch (error) {
