@@ -210,3 +210,51 @@ form {
     padding: 8px;
   }
 }
+
+/* Post Author */
+.post-author {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Post Content */
+.post-content {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Post Image */
+.post-img {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.post-img img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 검색 결과 제목과 뒤로가기 버튼 정렬 */
+.search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 제목과 버튼을 양쪽 끝에 정렬 */
+  margin-bottom: 20px;
+}
+
+.search-header h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.search-header .back-btn {
+  margin-left: 10px; /* 제목과 버튼 사이에 약간의 간격 */
+  padding: 8px 12px;
+  font-size: 14px;
+}

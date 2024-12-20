@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="search-results">
+    <div class="search-header">
+        <!-- 검색 결과 제목 -->
+        <h1>검색 결과: "{{ keyword }}"</h1>
+    
+        <!-- 뒤로가기 버튼 -->
+        <a href="/post" class="btn back-btn">뒤로가기</a>
+    </div>
+    
+    <!-- 검색 결과 목록 -->
+    {% if posts.length == 0 %}
+      <div id="no-results" class="centered-content">
+        <p>검색 결과가 없습니다.</p>
+      </div>
+    {% else %}
+      <div class="posts">
+        {% for post in posts %}
+        <div class="post">
+          <input type="hidden" value="{{ post.User.name }}" class="post-user-id">
+          <input type="hidden" value="{{ post.postId }}" class="post-id">
+          <div class="post-author">{{ post.User.name }}</div>
+          <div class="post-content">{{ post.content }}</div>
+
+          {% if post.img %}
+          <div class="post-img">
+            <img src="{{ post.img }}" alt="섬네일">
+          </div>
+          {% endif %}
+          <!-- 게시글 보기 버튼 -->
+          <a href="/post/{{ post.postId }}" class="btn">게시글 보기</a>
+          <!-- 편집 버튼 -->
+          <a href="/post/{{ post.postId }}/edit" class="btn">편집</a>
+        </div>
+        <br>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

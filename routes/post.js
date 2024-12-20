@@ -56,29 +56,29 @@ router.get('/', async (req, res, next) => {
 // 검색 라우트
 router.get('/search', async (req, res, next) => {
     try {
-        const { keyword } = req.query;
-        if (!keyword) {
-            return res.status(400).send('검색어를 입력해주세요.');
-        }
+        const keyword = req.query.keyword;
 
-        const results = await Post.findAll({
+        if (!keyword || keyword.trim() === '') {
+            // 검색어가 비어 있거나 공백만 있는 경우
+            return res.redirect('/'); // 검색 페이지로 리다이렉트
+        }
+        // 검색어 출력 (디버깅용)
+        console.log('검색 키워드:', keyword);
+        const posts = await Post.findAll({
             where: {
                 [Op.or]: [
-                    { content: { [Op.substring]: keyword } }, // 게시글 내용 검색
+                    { content: { [Op.substring]: keyword } }, // 게시글 내용에서 검색
+                    { '$User.name$': { [Op.substring]: keyword } }, // 작성자 이름에서 검색
                 ],
             },
             include: [
                 {
                     model: User,
-                    where: {
-                        username: { [Op.substring]: keyword }, // 작성자 이름 검색
-                    },
-                    attributes: ['name'], // 필요한 작성자 정보만 가져옴
+                    attributes: ['name'], // 작성자 이름 포함
                 },
             ],
         });
-
-        res.render('search', { results, keyword }); // 검색 결과 렌더링
+        res.render('search', { posts, keyword }); // 검색 결과 렌더링
     } catch (error) {
         console.error('검색 기능 오류:', error);
         next(error);
