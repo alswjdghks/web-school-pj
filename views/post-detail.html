@@ -1,9 +1,20 @@
-<div class="post-detail">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 상세</title>
+  <link rel="stylesheet" href="/main.css"> <!-- main.css 파일 연결 -->
+</head>
+<body>
+  <div class="post-detail">
     <h1>게시글 상세</h1>
     <p><strong>작성자:</strong> {{ post.User.name }}</p>
     <p><strong>내용:</strong> {{ post.content }}</p>
     {% if post.img %}
     <img src="/{{ post.img }}" alt="게시글 이미지">
     {% endif %}
-    <a href="/">목록으로 돌아가기</a>
+    <a href="/post" class="btn">목록으로 돌아가기</a> <!-- 버튼 스타일 적용 -->
   </div>
+</body>
+</html>

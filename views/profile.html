@@ -21,7 +21,8 @@
             {% if post.img %}
             <img src="/{{ post.img }}" alt="게시글 이미지">
             {% endif %}
-            <a href="/posts/{{ post.id }}">게시글 보기</a>
+            <a href="/post/{{ post.postId }}">게시글 보기</a>
+            
           </div>
         </li>
         {% endfor %}

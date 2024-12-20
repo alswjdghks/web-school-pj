@@ -39,6 +39,20 @@ router.post('/img', isLoggedIn, upload.single('img'), afterUploadImage);
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), uploadPost);
 
+// 게시판 페이지
+router.get('/', async (req, res, next) => {
+    try {
+        const posts = await Post.findAll({
+            include: [{ model: User, attributes: ['name'] }],
+            order: [['createdAt', 'DESC']],
+        });
+        res.render('posts', { posts, user: req.user });
+    } catch (error) {
+        console.error('게시판 로드 오류:', error);
+        next(error);
+    }
+});
+
 // 검색 라우트
 router.get('/search', async (req, res, next) => {
     try {
@@ -71,11 +85,11 @@ router.get('/search', async (req, res, next) => {
     }
 });
 
-router.get('/posts/:id', isLoggedIn, async (req, res, next) => {
+router.get('/:id', isLoggedIn, async (req, res, next) => {
     try {
         const post = await Post.findOne({
-            where: { id: req.params.id },
-            include: [{ model: User, attributes: ['name'] }],
+            where: { postId: req.params.id }, // 현재 로그인한 사용자의 게시글
+            include: [{ model: User, attributes: ['name'] }], // 작성자 이름 포함
         });
 
         if (!post) {

@@ -173,15 +173,21 @@ form {
   text-decoration: none;
 }
 
-.post-detail a:hover {
-  text-decoration: underline;
-}
-
 /* Error Messages */
 #error-message {
   color: red;
   font-weight: bold;
   margin-bottom: 15px;
+}
+
+/* Center content vertically and horizontally */
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20vh; /* Adjust this to control vertical positioning */
+  text-align: center;
 }
 
 /* Responsive Design */

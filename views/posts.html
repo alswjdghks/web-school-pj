@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="timeline">
+  <!-- 게시물 업로드 -->
+  {% if user %}
+  <div>
+    <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
+      <div class="input-group">
+        <textarea id="twit" name="content" maxlength="140"></textarea>
+      </div>
+      <div class="img-preview">
+        <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
+        <input id="img-url" type="hidden" name="url">
+      </div>
+      <div>
+        <label id="img-label" for="img">사진 업로드</label>
+        <input id="img" type="file" accept="image/*">
+        <button id="twit-btn" type="submit" class="btn">업로드</button>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+
+  <!-- 검색 폼 -->
+  <div class="posts">
+    <form id="search-form" action="/search">
+      <input type="text" name="keyword" placeholder="keyword 검색">
+      <button class="btn" type="submit">검색</button>
+    </form>
+
+    <!-- 게시물 목록 -->
+    {% for post in posts %}
+    <div class="post">
+      <input type="hidden" value="{{ post.User.name }}" class="post-user-id">
+      <input type="hidden" value="{{ post.postId }}" class="post-id">
+      <div class="post-author">{{ post.User.name }}</div>
+      <div class="post-content">{{ post.content }}</div>
+
+      {% if post.img %}
+      <div class="post-img">
+        <img src="{{ post.img }}" alt="섬네일">
+      </div>
+      {% endif %}
+    </div>
+    <br>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  // 이미지 업로드 처리
+  const imgInput = document.getElementById('img');
+  if (imgInput) {
+    imgInput.addEventListener('change', function () {
+      const formData = new FormData();
+      formData.append('img', this.files[0]);
+
+      axios.post('/post/img', formData)
+        .then((res) => {
+          document.getElementById('img-url').value = res.data.url;
+          document.getElementById('img-preview').src = res.data.url;
+          document.getElementById('img-preview').style.display = 'inline';
+        })
+        .catch((err) => {
+          console.error('이미지 업로드 에러:', err);
+        });
+    });
+  }
+</script>
+{% endblock %}
