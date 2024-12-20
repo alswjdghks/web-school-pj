@@ -42,6 +42,10 @@
         <img src="{{ post.img }}" alt="섬네일">
       </div>
       {% endif %}
+      <!-- 게시글 보기 버튼 -->
+      <a href="/post/{{ post.postId }}" class="btn">게시글 보기</a>
+      <!-- 편집 버튼 -->
+      <a href="/post/{{ post.postId }}/edit" class="btn">편집</a>
     </div>
     <br>
     {% endfor %}

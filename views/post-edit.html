@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="timeline">
+  <h2>게시글 수정</h2>
+  <form action="/post/{{ post.postId }}/edit" method="post" enctype="multipart/form-data">
+    <div class="input-group">
+      <label for="content">내용</label>
+      <textarea id="content" name="content">{{ post.content }}</textarea>
+    </div>
+    {% if post.img %}
+    <div>
+      <img src="{{ post.img }}" alt="이미지">
+    </div>
+    {% endif %}
+    <div class="input-group">
+      <label for="img">이미지 변경</label>
+      <input type="file" id="img" name="img" accept="image/*">
+    </div>
+    <button type="submit" class="btn">수정</button>
+  </form>
+
+  <!-- 삭제 버튼 -->
+  <form action="/post/{{ post.postId }}/delete" method="post">
+    <button type="submit" class="btn" style="background-color: red;">삭제</button>
+  </form>
+</div>
+{% endblock %}

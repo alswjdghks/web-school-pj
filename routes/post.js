@@ -103,4 +103,59 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.get('/:id/edit', isLoggedIn, async (req, res, next) => {
+    try {
+        const post = await Post.findOne({
+            where: { postId: req.params.id, userId: req.user.userId }, // 권한 확인
+        });
+
+        if (!post) {
+            return res.status(404).send('게시글이 존재하지 않거나 수정 권한이 없습니다.');
+        }
+
+        res.render('post-edit', { post }); // post-edit.html로 데이터 전달
+    } catch (error) {
+        console.error('게시글 수정 페이지 로드 오류:', error);
+        next(error);
+    }
+});
+
+// POST /:id/edit (게시글 수정)
+router.post('/:id/edit', isLoggedIn, upload.single('img'), async (req, res, next) => {
+    try {
+        const post = await Post.findOne({ where: { postId: req.params.id, userId: req.user.userId } });
+
+        if (!post) {
+            return res.status(403).send('권한이 없습니다.');
+        }
+
+        await post.update({
+            content: req.body.content || post.content,
+            img: req.file ? `/uploads/${req.file.filename}` : post.img,
+        });
+
+        res.redirect(`/post/${req.params.id}`);
+    } catch (error) {
+        console.error('게시글 수정 오류:', error);
+        next(error);
+    }
+});
+
+// POST /:id/delete (게시글 삭제)
+router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
+    try {
+        const post = await Post.findOne({ where: { postId: req.params.id, userId: req.user.userId } });
+
+        if (!post) {
+            return res.status(403).send('권한이 없습니다.');
+        }
+
+        await post.destroy();
+        res.redirect('/post');
+    } catch (error) {
+        console.error('게시글 삭제 오류:', error);
+        next(error);
+    }
+})
+
 module.exports =router;
